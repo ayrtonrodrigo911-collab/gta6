@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Bangers", system-ui;
+    /*apply font*/
+
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(img/background2.jpg);
+    background-size: cover;
+    /*cobre a tela toda*/
+    background-position: center;
+    /*centraliza a imagem*/
+}
+
+.lucianame {
+    color: #ff3cac;
+    /*tamando da fonte*/
+    font-size: 360px;
+    position: absolute;
+    bottom: 500px;
+
+    /* centralizar o texto */
+    text-align: center;
+    width: 100%;
+}
+
+.luciaimg {
+    position: absolute;
+    bottom: 0;
+    /*altura/largura*/
+    height: 700px;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.text {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+}
+
+.select-your-character {
+    font-size: 26px;
+    color: #ffd319;
+}
+
+h1 {
+    font-size: 72px;
+    color: white;
+}
+
+.choose-city {
+    font-size: 14px;
+    color: white;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.lucia-btn {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid white;
+}
+
+.jason-btn {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid white;
+}
+
+.cj-btn {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 2px solid white;
+}
+
+.you-btn {
+    background-color: #ffd319;
+    padding: 20px;
+    border-radius: 50%;
+}
