@@ -12,7 +12,6 @@ let luciaimg = document.querySelector(".luciaimg")
 
 
 function sectercharacter() {
-    lucianame.innerHTML = "Jason"
+    lucianame.textContent = "Jason"
     luciaimg.src = "img/jason.png"
-
 }
