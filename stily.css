@@ -1,106 +1,505 @@
+/* ═══════════════════════════════════════════════════
+   GTA VI - DevClub Character Selector
+   Premium Cinematic Stylesheet
+   ═══════════════════════════════════════════════════ */
+
+/* ── Reset & Base ──────────────────────────────── */
 * {
     margin: 0;
     box-sizing: border-box;
     font-family: "Bangers", system-ui;
-    /*apply font*/
-
 }
 
-html {
+html,
+body {
     height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 body {
-    background-image: url(img/background2.jpg);
+    background-image: url(img/background/background2.jpg);
     background-size: cover;
-    /*cobre a tela toda*/
     background-position: center;
-    /*centraliza a imagem*/
+    background-repeat: no-repeat;
+    position: relative;
+    transition: background-image 0.8s ease-in-out;
 }
 
+/* ── Canvas de Partículas ─────────────────────── */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── Overlay Cinematográfico ──────────────────── */
+.cinematic-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 40%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 25%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 30%);
+}
+
+
+/* ── Nome Gigante do Personagem ───────────────── */
 .lucianame {
     color: #ff3cac;
-    /*tamando da fonte*/
-    font-size: 360px;
+    font-size: clamp(120px, 20vw, 280px);
     position: absolute;
-    bottom: 500px;
-
-    /* centralizar o texto */
+    top: 8%;
+    left: 0;
     text-align: center;
     width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow:
+        0 0 40px rgba(255, 60, 172, 0.4),
+        0 10px 60px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform, opacity;
+    line-height: 0.9;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
 }
 
+/* ── Imagem Principal do Personagem ───────────── */
 .luciaimg {
     position: absolute;
     bottom: 0;
-    /*altura/largura*/
     height: 700px;
     margin: auto;
     left: 0;
     right: 0;
+    transform-origin: bottom center;
+    will-change: transform, opacity;
+    z-index: 2;
+    opacity: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5));
 }
 
+/* Zoom classes para personagens de corpo inteiro */
+.luciaimg.claude-zoom {
+    height: 1250px;
+    bottom: -500px;
+}
+
+.luciaimg.franklin-zoom {
+    height: 900px;
+    bottom: -150px;
+}
+
+/* ── Cachorro (Chop) ──────────────────────────── */
+.dog-img {
+    position: absolute;
+    bottom: -120px;
+    height: 520px;
+    z-index: 3;
+    display: none;
+    pointer-events: none;
+    left: 20%;
+    transform: translateX(260px);
+    transform-origin: bottom center;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.4));
+}
+
+.dog-img.show {
+    display: block;
+}
+
+/* ── Bloco de Texto Principal ─────────────────── */
 .text {
     position: absolute;
-    bottom: 40px;
-    left: 0;
+    bottom: 44px;
+    left: 40px;
+    z-index: 10;
 }
 
 .select-your-character {
-    font-size: 26px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
     color: #ffd319;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    margin-bottom: 4px;
 }
 
 h1 {
-    font-size: 72px;
+    font-size: 68px;
     color: white;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.15),
+        3px 3px 16px rgba(0, 0, 0, 0.9);
+    line-height: 1;
+    margin-bottom: 6px;
 }
 
 .choose-city {
+    font-family: "Oswald", sans-serif;
+    font-weight: 300;
     font-size: 14px;
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
+/* ── Botões de Personagem ─────────────────────── */
 .buttons {
     position: absolute;
-    bottom: 40px;
+    bottom: 60px;
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-
+    gap: 18px;
+    z-index: 20;
 }
 
-.lucia-btn {
+/* Reset dos botões */
+.buttons button {
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Efeito hover premium nos botões */
+.char-btn-box {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.char-btn-box:hover {
+    transform: translateY(-10px) scale(1.1);
+    filter: drop-shadow(0 8px 20px rgba(255, 60, 172, 0.5));
+}
+
+/* Anel brilhante no botão ativo (personagem selecionado) */
+.char-btn-box.active {
+    transform: translateY(-6px) scale(1.05);
+}
+
+.char-btn-box.active::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2.5px solid #ffd319;
+    box-shadow: 0 0 14px rgba(255, 211, 25, 0.6), inset 0 0 14px rgba(255, 211, 25, 0.15);
+    animation: pulse-ring 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse-ring {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(255, 211, 25, 0.4), inset 0 0 10px rgba(255, 211, 25, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 22px rgba(255, 211, 25, 0.8), inset 0 0 22px rgba(255, 211, 25, 0.25);
+    }
+}
+
+/* REGRA UNIVERSAL: Todas as imagens dos botões = 100x100 */
+.buttons img,
+.lucia-btn,
+.jason-btn,
+.cj-btn,
+.tommy-btn,
+.pgta3-btn,
+.pgta5-btn {
     height: 100px;
     width: 100px;
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    display: block;
+    transition: border-color 0.3s ease;
 }
 
-.jason-btn {
+.char-btn-box:hover img {
+    border-color: #fff;
+}
+
+/* ── Estilos Individuais dos Botões ────────────── */
+.lucia-btn-box {
+    background: linear-gradient(135deg, #ff8800 0%, #dd017f 50%, #6100fe 100%);
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid rgb(238, 0, 255);
+}
+
+.jason-btn-box {
+    background: linear-gradient(135deg, #7028e4 0%, #ff5277 50%, #ffa136 100%);
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid rgb(238, 0, 255);
+}
+
+.tommy-btn-box {
+    background: linear-gradient(180deg, #260b68 0%, #c231c9 50%, #68a2eb 100%);
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid rgb(238, 0, 255);
+}
+
+.pgta3-btn-box {
+    background: linear-gradient(to right, #aa0000, #ff3366);
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid #ff3366;
+}
+
+.pgta5-btn-box {
+    background: linear-gradient(135deg, #0a7e8c 0%, #1b3b42 50%, #00d2ff 100%);
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid rgb(238, 0, 255);
+}
+
+.cj-btn-box {
+    background: linear-gradient(to top, #191919, rgb(255, 255, 255));
+    padding: 1px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.99px solid rgb(0, 0, 0);
+}
+
+/* ── Botão YOU (Upload) ───────────────────────── */
+.you-btn-box {
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
     border: 2px solid white;
-}
-
-.cj-btn {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff8800 0%, #dd017f 50%, #6100fe 100%);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
 }
 
 .you-btn {
-    background-color: #ffd319;
-    padding: 20px;
-    border-radius: 50%;
+    display: none;
+}
+
+.you-btn-label {
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.you-btn-box:hover .you-btn-label {
+    color: #ffd319;
+}
+
+
+/* ── Logos no Canto Inferior Direito ────────── */
+.bottom-logos {
+    position: absolute;
+    bottom: 30px;
+    right: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    z-index: 25;
+    pointer-events: none;
+}
+
+.bottom-logos img {
+    height: 60px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+    display: block;
+}
+
+.bottom-logos .logo-rockstar {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 900px) {
+    .lucianame {
+        font-size: clamp(60px, 18vw, 200px);
+        top: 10%;
+    }
+
+    .buttons {
+        gap: 10px;
+        bottom: 40px;
+    }
+
+    .buttons img,
+    .lucia-btn,
+    .jason-btn,
+    .cj-btn,
+    .tommy-btn,
+    .pgta3-btn,
+    .pgta5-btn {
+        height: 70px;
+        width: 70px;
+    }
+
+    .you-btn-box {
+        height: 74px;
+        width: 74px;
+    }
+
+    .you-btn-label {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .select-your-character {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+
+    .text {
+        bottom: 30px;
+        left: 20px;
+    }
+
+    .luciaimg {
+        height: 500px;
+    }
+
+    .luciaimg.claude-zoom {
+        height: 900px;
+        bottom: -350px;
+    }
+
+    .luciaimg.franklin-zoom {
+        height: 650px;
+        bottom: -100px;
+    }
+
+    .dog-img {
+        height: 380px;
+        left: 15%;
+        transform: translateX(180px);
+    }
+
+    .bottom-logos {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+
+    .bottom-logos img {
+        height: 42px;
+    }
+
+    .bottom-logos .logo-rockstar {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .lucianame {
+        font-size: clamp(48px, 16vw, 140px);
+    }
+
+    .buttons {
+        gap: 6px;
+        bottom: 30px;
+    }
+
+    .buttons img,
+    .lucia-btn,
+    .jason-btn,
+    .cj-btn,
+    .tommy-btn,
+    .pgta3-btn,
+    .pgta5-btn {
+        height: 52px;
+        width: 52px;
+    }
+
+    .you-btn-box {
+        height: 56px;
+        width: 56px;
+    }
+
+    .you-btn-label {
+        font-size: 9px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .bottom-logos {
+        bottom: 12px;
+        right: 12px;
+        gap: 8px;
+    }
+
+    .bottom-logos img {
+        height: 32px;
+    }
+
+    .bottom-logos .logo-rockstar {
+        height: 30px;
+        width: 30px;
+    }
 }
