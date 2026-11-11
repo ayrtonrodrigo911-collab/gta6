@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GTA VI - DevClub Character Select</title>
+    <meta name="description" content="Choose your GTA legend. A premium character selection experience by DevClub.">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" type="image/x-icon" href="img/fiveico/rockstar logo GTA6.ico">
+    <link rel='stylesheet' type='text/css' media='screen' href='stily.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- GSAP para animações cinematográficas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- Canvas para partículas de fundo -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Overlay cinematic gradient -->
+    <div class="cinematic-overlay"></div>
+
+    <!-- HUD Container (Canto Superior Direito estilo clássico GTA) -->
+    <div class="game-hud-container">
+        <!-- Imagem HUD temática do jogo do personagem -->
+        <div class="hud-frame" id="hud-frame" style="display: none;">
+            <img class="hud-image" id="hud-image" alt="HUD">
+        </div>
+        <!-- Estrelas de Procurado (logo abaixo da HUD) -->
+        <div class="wanted-hud">
+            <span class="wanted-label">WANTED</span>
+            <div class="wanted-stars">
+                <span class="wanted-star" data-star="1">★</span>
+                <span class="wanted-star" data-star="2">★</span>
+                <span class="wanted-star" data-star="3">★</span>
+                <span class="wanted-star" data-star="4">★</span>
+                <span class="wanted-star" data-star="5">★</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nome gigante do personagem -->
+    <p class="lucianame">Lucia</p>
+
+    <!-- Imagem principal do personagem -->
+    <img class="luciaimg" src="img/character/lucia.png" alt="Character">
+
+    <!-- Cachorro (Chop) - Aparece somente com Franklin -->
+    <img class="dog-img" src="img/character/rotvailerr.png" alt="Chop">
+
+    <!-- Texto principal -->
+    <div class="text">
+        <p class="select-your-character">Select your character</p>
+        <h1>Its not just<br>a game</h1>
+        <p class="choose-city">Choose a Dev City legend.</p>
+    </div>
+
+    <!-- Botões de seleção de personagem -->
+    <div class="buttons">
+        <button class="char-btn-box lucia-btn-box active" id="btn-lucia"
+            onclick="sectercharacter('Lucia', 'img/character/lucia.png', '#ff3cac', 'img/background/background2.jpg', this)">
+            <img class="lucia-btn" src="img/character/lucia.png" alt="Lucia">
+        </button>
+        <button class="char-btn-box jason-btn-box" id="btn-jason"
+            onclick="sectercharacter('Jason', 'img/character/jason.png', '#00b2c9', 'img/background/background2.jpg', this)">
+            <img class="jason-btn" src="img/character/jason.png" alt="Jason">
+        </button>
+        <button class="char-btn-box cj-btn-box" id="btn-cj"
+            onclick="sectercharacter('CJ', 'img/character/cj.png', '#7ed37e', 'img/background/background2.jpg', this)">
+            <img class="cj-btn" src="img/character/cj.png" alt="CJ">
+        </button>
+        <button class="char-btn-box tommy-btn-box" id="btn-tommy"
+            onclick="sectercharacter('Tommy', 'img/character/Tommy.png', '#4495ff', 'img/background/background.jpg', this)">
+            <img class="tommy-btn" src="img/character/Tommy.png" alt="Tommy">
+        </button>
+        <button class="char-btn-box pgta3-btn-box" id="btn-claude"
+            onclick="sectercharacter('Claude', 'img/character/claude.png', '#ff0000', 'img/background/background2.jpg', this)">
+            <img class="pgta3-btn" src="img/character/claude.png" alt="Claude">
+        </button>
+        <button class="char-btn-box pgta5-btn-box" id="btn-franklin"
+            onclick="sectercharacter('Franklin', 'img/character/franklin.png', '#0a7e8c', 'img/background/background2.jpg', this)">
+            <img class="pgta5-btn" src="img/character/franklin.png" alt="Franklin">
+        </button>
+        <label class="you-btn-box char-btn-box" id="btn-you">
+            <input class="you-btn" type="file" accept="image/*" onchange="seephoto(this)">
+            <span class="you-btn-label">YOU</span>
+        </label>
+    </div>
+
+    <!-- Logos no canto inferior direito -->
+    <div class="bottom-logos">
+        <img class="logo-game" src="img/ico/GTA6 ico.png" alt="Game Logo">
+        <img class="logo-rockstar" src="img/ico/rockstar logo GTA6.jpeg" alt="Rockstar Games">
+    </div>
+
+    <script src="scripity.js"></script>
+</body>
+
+</html>
