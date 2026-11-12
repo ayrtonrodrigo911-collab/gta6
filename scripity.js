@@ -112,6 +112,7 @@ const characterColors = {
 }
 
 // ═══════════════════════════════════════════
+<<<<<<< HEAD
 // 3.05 MAP DE WANTED LEVEL + HUD POR PERSONAGEM
 // ═══════════════════════════════════════════
 const characterWanted = {
@@ -133,6 +134,8 @@ const characterHuds = {
 }
 
 // ═══════════════════════════════════════════
+=======
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
 // 3.1 MAP DE LOGOS POR PERSONAGEM
 // ═══════════════════════════════════════════
 const characterLogos = {
@@ -169,12 +172,19 @@ const characterLogos = {
 // ═══════════════════════════════════════════
 // 4. INTRO ANIMATION (Page Load)
 // ═══════════════════════════════════════════
+<<<<<<< HEAD
 function initIntro() {
     updateHUD('Lucia', '#ff3cac')
 
     const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
         onComplete: () => startCharacterAnimation('Lucia')
+=======
+window.addEventListener("DOMContentLoaded", () => {
+    const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onComplete: startIdleAnimation
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
     })
 
     tl.from("body", {
@@ -210,6 +220,7 @@ function initIntro() {
         duration: 0.5,
         ease: "power2.out"
     }, "-=0.3")
+<<<<<<< HEAD
 }
 
 if (document.readyState === 'loading') {
@@ -291,6 +302,16 @@ function startDogIdleAnimation() {
 function startCharacterAnimation() {
     gsap.killTweensOf(luciaimg)
     gsap.set(luciaimg, { opacity: 1, transformOrigin: "bottom center", rotation: 0, x: 0, y: 0 })
+=======
+})
+
+// ═══════════════════════════════════════════
+// 5. IDLE BREATHING ANIMATIONS
+// ═══════════════════════════════════════════
+function startIdleAnimation() {
+    gsap.killTweensOf(luciaimg)
+    gsap.set(luciaimg, { opacity: 1 })
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
     gsap.to(luciaimg, {
         scaleY: 1.012,
         scaleX: 1.006,
@@ -302,6 +323,22 @@ function startCharacterAnimation() {
     })
 }
 
+<<<<<<< HEAD
+=======
+function startDogIdleAnimation() {
+    gsap.killTweensOf(dogimg)
+    gsap.to(dogimg, {
+        scaleY: 1.018,
+        scaleX: 1.01,
+        transformOrigin: "bottom center",
+        duration: 2.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+    })
+}
+
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
 // ═══════════════════════════════════════════
 // 6. CHARACTER SWITCHING
 // ═══════════════════════════════════════════
@@ -315,9 +352,12 @@ function sectercharacter(name, image, colorname, background = 'img/background/ba
         targetColor = { ...characterColors[name] }
     }
 
+<<<<<<< HEAD
     // Atualizar HUD (Wanted Stars + Weapon)
     updateHUD(name, colorname)
 
+=======
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
     // Animação de saída rápida
     gsap.to([luciaimg, lucianame, bottomLogos], {
         opacity: 0,
@@ -353,7 +393,11 @@ function sectercharacter(name, image, colorname, background = 'img/background/ba
             // Animação de entrada (ancorada na base, sem mostrar o corte do corpo)
             gsap.fromTo(luciaimg,
                 { opacity: 0, scale: 0.95, transformOrigin: "bottom center" },
+<<<<<<< HEAD
                 { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", onComplete: () => startCharacterAnimation(name) }
+=======
+                { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out", onComplete: startIdleAnimation }
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
             )
 
             // Animação do nome
@@ -379,7 +423,11 @@ function sectercharacter(name, image, colorname, background = 'img/background/ba
                         duration: 0.5,
                         delay: 0.1,
                         ease: "power2.out",
+<<<<<<< HEAD
                         onComplete: startDogAggressiveAnimation
+=======
+                        onComplete: startDogIdleAnimation
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
                     }
                 )
             } else {
@@ -406,6 +454,7 @@ function seephoto(input) {
         sectercharacter("YOU", urlFoto, "#ffd319", 'img/background/background2.jpg', youBtn)
     }
 }
+<<<<<<< HEAD
 
 // ═══════════════════════════════════════════
 // 8. GAME HUD + WANTED STARS UPDATE
@@ -529,3 +578,5 @@ window.addEventListener('mousemove', (e) => {
         })
     }
 })
+=======
+>>>>>>> 12d065686d8552236f0f462b8ac07d0d5be8503d
